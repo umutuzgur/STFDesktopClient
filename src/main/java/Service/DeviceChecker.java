@@ -43,9 +43,7 @@ public class DeviceChecker {
 					logger.error("Device lost");
 					device = null;
 					adb.createBridge();
-
 				}
-
 			} catch (Throwable t) {
 				t.printStackTrace();
 			}
@@ -57,6 +55,7 @@ public class DeviceChecker {
 		try {
 			Runtime.getRuntime().exec("sh minicap/run.sh -P 1080x1920@360x640/0");
 			Runtime.getRuntime().exec("sh minitouch/run.sh");
+			Runtime.getRuntime().exec("sh service/run.sh");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,6 +65,8 @@ public class DeviceChecker {
 		try {
 			Runtime.getRuntime().exec("adb forward tcp:1717 localabstract:minicap");
 			Runtime.getRuntime().exec("adb forward tcp:1313 localabstract:minitouch");
+			Runtime.getRuntime().exec("adb forward tcp:1090 tcp:1090");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
